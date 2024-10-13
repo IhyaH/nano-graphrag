@@ -1,4 +1,4 @@
-这是对于nano-graphrag的修改
+这是对于nano-graphrag的修改，添加代理变量，适合国内使用，模型已设置为gpt-4o-mini，以减少费用消耗。
 
 ## 安装
 
