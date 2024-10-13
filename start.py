@@ -1,7 +1,7 @@
 import os
 # 设置环境变量 OPENAI_API_KEY 和 OPENAI_BASE_URL
-os.environ['OPENAI_API_KEY'] = 'sk-Fc8qfHHDIxvkiDL717474aF8170243Be8a60168c7eEf6091'
-os.environ['OPENAI_BASE_URL'] = 'https://openkey.cloud/v1'
+os.environ['OPENAI_API_KEY'] = '***'
+os.environ['OPENAI_BASE_URL'] = '***'
 os.environ['PYTHONIOENCODING'] = 'UTF-8'
 # 导入语句：从nano_graphrag模块中导入GraphRAG类和QueryParam类
 # nano_graphrag是自定义模块名，GraphRAG是图数据库操作类，QueryParam是查询参数配置类

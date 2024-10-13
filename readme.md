@@ -22,7 +22,7 @@ pip install -e .
 
 > [!TIP]
 >
-> **请在start.py中设置OpenAI API密钥和接口代理地址
+> 请在start.py中设置OpenAI API密钥和接口代理地址
 ```
 os.environ['OPENAI_API_KEY'] = '你的API KEY'
 os.environ['OPENAI_BASE_URL'] = '国内API接口代理地址'
@@ -32,6 +32,9 @@ os.environ['OPENAI_BASE_URL'] = '国内API接口代理地址'
 ```
 python start.py
 ```
+
+如果出现编码问题UnicodeDecodeError
+请使用项目内nano-graphrag\.conda\Lib\site-packages\nano_vectordb\dbs.py替换本地文件
 
 #### 批量插入
 
