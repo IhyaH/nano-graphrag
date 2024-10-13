@@ -20,13 +20,13 @@ pip install -e .
 ```
 ## 快速开始
 
-> [!TIP]
->
-> 请在start.py中设置OpenAI API密钥和接口代理地址
+请在start.py中设置OpenAI API密钥和接口代理地址
 ```
 os.environ['OPENAI_API_KEY'] = '你的API KEY'
 os.environ['OPENAI_BASE_URL'] = '国内API接口代理地址'
 ```
+
+将知识库文档放入book.txt中
 
 输入以下命令开始运行
 ```
