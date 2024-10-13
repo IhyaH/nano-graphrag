@@ -1,64 +1,37 @@
-😭 [GraphRAG](https://arxiv.org/pdf/2404.16130) 很好且功能强大，但官方的 [实现](https://github.com/microsoft/graphrag/tree/main) 阅读或修改起来很困难/痛苦。
-
-😊 这个项目提供了一个 **更小、更快、更干净的 GraphRAG**，同时保留了核心功能（见 [基准测试](#benchmark) 和 [问题](#Issues)）。
-
-🎁 不包括 `tests` 和提示，`nano-graphrag` 大约有 **1100行代码**。
-
-👌 小巧但 [**便携**](#Components)（faiss, neo4j, ollama...），[**异步**](#Async) 且完全类型化。
+这是对于nano-graphrag的修改
 
 ## 安装
 
-**从源代码安装**（推荐）
+**从源代码安装**
 
 ```shell
-# 首先克隆这个仓库
+# 首先创建Anaconda环境
+conda create -n nano-graphrag python=3.11
+# 进入环境
+conda activate nano-graphrag
+# 克隆这个仓库
+git clone https://github.com/IhyaH/nano-graphrag.git
+# 进入nano-graphrag目录
 cd nano-graphrag
+# 单独安装hnswlib库防止安装时报错
 conda install -c conda-forge hnswlib
+# 开始安装
 pip install -e .
 ```
-
-**从PyPi安装**
-
-```shell
-pip install nano-graphrag
-```
-
 ## 快速开始
 
 > [!TIP]
 >
-> **请在环境变量中设置OpenAI API密钥：`export OPENAI_API_KEY="sk-..."`。**
-
-> [!TIP]
-> 如果你使用的是Azure OpenAI API，请参考 [.env.example](./.env.example.azure) 设置你的azure openai。然后传递 `GraphRAG(...,using_azure_openai=True,...)` 以启用。
-
-> [!TIP]
-> 如果你没有密钥，可以查看这个 [示例](./examples/no_openai_key_at_all.py)，它使用了 `transformers` 和 `ollama`。如果你想使用另一个LLM或嵌入模型，请查看 [高级](#Advances)。
-
-下载查尔斯·狄更斯的《圣诞颂歌》的副本：
-
-```shell
-curl https://raw.githubusercontent.com/gusye1234/nano-graphrag/main/tests/mock_data.txt  > ./book.txt
+> **请在start.py中设置OpenAI API密钥和接口代理地址
+```
+os.environ['OPENAI_API_KEY'] = '你的API KEY'
+os.environ['OPENAI_BASE_URL'] = '国内API接口代理地址'
 ```
 
-使用下面的Python代码片段：
-
-```python
-from nano_graphrag import GraphRAG, QueryParam
-
-graph_func = GraphRAG(working_dir="./dickens")
-
-with open("./book.txt") as f:
-    graph_func.insert(f.read())
-
-# 执行全局graphrag搜索
-print(graph_func.query("这个故事中的主题是什么？"))
-
-# 执行局部graphrag搜索（我认为这是更好、更可扩展的一个）
-print(graph_func.query("这个故事中的主题是什么？", param=QueryParam(mode="local")))
+输入以下命令开始运行
 ```
-
-下次你从同一个 `working_dir` 初始化一个 `GraphRAG` 时，它会自动重新加载所有的上下文。
+python start.py
+```
 
 #### 批量插入
 
