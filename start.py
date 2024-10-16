@@ -29,13 +29,26 @@ with open("./book.txt", encoding="utf-8") as f:
     # f.read()是文件对象的读方法，读取文件的全部内容
     graph_func.insert(f.read())
 
-# 使用print函数打印执行图数据库查询的结果
-# 查询语句是"What are the top themes in this story?"，执行全局搜索
-# 查询结果通过graph_func实例的query方法获取
-print(graph_func.query("What are the top themes in this story?"))
+question = "变压器在运行状态下，相连出线刀闸和相连接地刀闸还有相应保护装置应该分别处于什么状态?"
 
-# 使用print函数打印执行局部图数据库查询的结果
-# 查询语句同样是"What are the top themes in this story?"，但这次指定了局部搜索模式
-# QueryParam(mode="local")创建了一个查询参数实例，设置搜索模式为"local"，即局部搜索
-# 局部搜索通常更精确，可扩展性更好
-print(graph_func.query("What are the top themes in this story?", param=QueryParam(mode="local")))
+# 打开一个文件用于写入，如果文件不存在则创建
+with open('output.md', 'w', encoding='utf-8') as file:
+    # 在终端和文件中输出问题
+    print("Question:", question)
+    file.write(f"Question: {question}\n\n")
+    
+    # 执行全局搜索并同时输出到终端和文件
+    global_result = graph_func.query(question)
+    print("Global Search Result:")
+    print(global_result)
+    file.write("Global Search Result:\n")
+    file.write(global_result + "\n\n")
+    
+    # 执行局部搜索并同时输出到终端和文件
+    local_result = graph_func.query(question, param=QueryParam(mode="local"))
+    print("Local Search Result:")
+    print(local_result)
+    file.write("Local Search Result:\n")
+    file.write(local_result + "\n")
+
+print("已将输出保存到output.md文件中。")
